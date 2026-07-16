@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor TikFinity Overlay</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Moveable -->
+    <script src="https://daybrush.com/moveable/release/latest/dist/moveable.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Barra superior -->
+    <header id="toolbar">
+
+        <button id="btnAgregar">➕ Agregar</button>
+
+        <button id="btnEditar">✏️ Editar</button>
+
+        <button id="btnDuplicar">📋 Duplicar</button>
+
+        <button id="btnEliminar">🗑 Eliminar</button>
+
+        <button id="btnGuardar">💾 Guardar</button>
+
+    </header>
+
+    <!-- Área de trabajo -->
+    <main id="workspace">
+
+        <div id="canvas">
+
+            <!-- Imagen guía -->
+            <img id="guia" src="guia.jpeg" alt="Guía">
+
+            <!-- Aquí aparecerán los widgets -->
+
+        </div>
+
+    </main>
+
+    <!-- Scripts -->
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="editor.js"></script>
+
+</body>
+
+</html>
