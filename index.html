@@ -2,50 +2,146 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Editor TikFinity Overlay</title>
+
 
     <link rel="stylesheet" href="style.css">
 
+
     <!-- Moveable -->
     <script src="https://daybrush.com/moveable/release/latest/dist/moveable.min.js"></script>
+
+
 </head>
+
 
 <body>
 
-    <!-- Barra superior -->
+
+    <!-- ===========================
+         BARRA SUPERIOR
+    ============================ -->
+
     <header id="toolbar">
 
-        <button id="btnAgregar">➕ Agregar</button>
 
-        <button id="btnEditar">✏️ Editar</button>
+        <button id="btnAgregar">
+            ➕ Agregar
+        </button>
 
-        <button id="btnDuplicar">📋 Duplicar</button>
 
-        <button id="btnEliminar">🗑 Eliminar</button>
+        <button id="btnEditar">
+            ✏️ Editar
+        </button>
 
-        <button id="btnGuardar">💾 Guardar</button>
+
+        <button id="btnDuplicar">
+            📋 Duplicar
+        </button>
+
+
+        <button id="btnEliminar">
+            🗑 Eliminar
+        </button>
+
+
+        <button id="btnGuardar">
+            💾 Guardar
+        </button>
+
 
     </header>
 
-    <!-- Área de trabajo -->
+
+
+    <!-- ===========================
+         ÁREA DE TRABAJO
+    ============================ -->
+
     <main id="workspace">
+
 
         <div id="canvas">
 
-            <!-- Imagen guía -->
-            <img id="guia" src="guia.jpeg" alt="Guía">
 
-            <!-- Aquí aparecerán los widgets -->
+            <!-- Imagen guía -->
+
+            <img 
+            id="guia" 
+            src="guia.jpeg" 
+            alt="Guía">
+
+
+            <!-- ===========================
+                 WIDGETS TIKFINITY
+            ============================ -->
+
+
+            <!-- ALERTA SEGUIDOR -->
+
+            <div
+            id="alerta_seguidor"
+            class="widget"
+            style="
+            left:100px;
+            top:300px;
+            width:400px;
+            height:200px;">
+            </div>
+
+
+
+            <!-- ALERTA REGALO -->
+
+            <div
+            id="alerta_regalo"
+            class="widget"
+            style="
+            left:100px;
+            top:600px;
+            width:400px;
+            height:300px;">
+            </div>
+
+
+
+            <!-- ALERTA DONACIÓN -->
+
+            <div
+            id="alerta_donacion"
+            class="widget"
+            style="
+            left:100px;
+            top:1000px;
+            width:400px;
+            height:300px;">
+            </div>
+
+
 
         </div>
 
+
     </main>
 
-    <!-- Scripts -->
+
+
+
+    <!-- ===========================
+         SCRIPTS
+    ============================ -->
+
+
     <script type="module" src="firebase.js"></script>
+
     <script type="module" src="editor.js"></script>
+
+
 
 </body>
 
