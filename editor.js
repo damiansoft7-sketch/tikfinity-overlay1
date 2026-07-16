@@ -1,96 +1,167 @@
-// ===============================
+// =====================================
 // EDITOR TIKFINITY OVERLAY
-// PRISM LIVE MOBILE - 9:16
+// PRISM LIVE MOBILE 9:16
+// =====================================
+
+
+let elementoSeleccionado = null;
+
+
+// Obtener widgets
+
+const widgets = document.querySelectorAll(".widget");
+
+
+
+// ===============================
+// SELECCIONAR WIDGET
 // ===============================
 
-const canvas = document.getElementById("canvas");
-
-let selectedElement = null;
+widgets.forEach(widget => {
 
 
-// Inicializar Moveable
-const moveable = new Moveable(document.body, {
-    target: null,
-    draggable: true,
-    resizable: true,
-    keepRatio: false
-});
+    widget.addEventListener("click",()=>{
 
 
-// Seleccionar elementos
-document.querySelectorAll(".widget").forEach(widget => {
+        elementoSeleccionado = widget;
 
-    widget.addEventListener("click", () => {
 
-        selectedElement = widget;
+        widget.classList.add("seleccionado");
+
 
         moveable.target = widget;
 
+
     });
 
+
 });
+
+
+
+// ===============================
+// MOVEABLE
+// ===============================
+
+
+const moveable = new Moveable(document.body,{
+
+    target:null,
+
+    draggable:true,
+
+    resizable:true,
+
+    keepRatio:false
+
+});
+
+
 
 
 // Movimiento
-moveable.on("drag", e => {
+
+moveable.on("drag",e=>{
+
 
     e.target.style.transform = e.transform;
 
+
 });
 
 
-// Cambio de tamaño
-moveable.on("resize", e => {
 
-    e.target.style.width = `${e.width}px`;
-    e.target.style.height = `${e.height}px`;
+// Tamaño
+
+moveable.on("resize",e=>{
+
+
+    e.target.style.width = e.width + "px";
+
+    e.target.style.height = e.height + "px";
+
 
     e.target.style.transform = e.drag.transform;
 
+
 });
 
 
-// Guardar diseño
+
+
+
+// ===============================
+// GUARDAR DISEÑO
+// ===============================
+
+
 function guardarDiseño(){
 
-    const elementos = [];
 
-    document.querySelectorAll(".widget").forEach(widget => {
+    let datos=[];
 
-        elementos.push({
 
-            id: widget.id,
 
-            x: widget.offsetLeft,
+    document.querySelectorAll(".widget").forEach(widget=>{
 
-            y: widget.offsetTop,
 
-            width: widget.offsetWidth,
+        datos.push({
 
-            height: widget.offsetHeight,
 
-            transform: widget.style.transform
+            id:widget.id,
+
+
+            x:widget.offsetLeft,
+
+
+            y:widget.offsetTop,
+
+
+            width:widget.offsetWidth,
+
+
+            height:widget.offsetHeight,
+
+
+            transform:widget.style.transform
+
+
 
         });
 
+
+
     });
+
 
 
     firebase.database()
     .ref("diseño")
-    .set(elementos)
+    .set(datos)
     .then(()=>{
 
-        alert("Diseño guardado");
+
+        alert("Diseño guardado correctamente");
+
 
     });
+
+
 
 }
 
 
 
-// Cargar diseño
+
+
+// ===============================
+// CARGAR DISEÑO
+// ===============================
+
+
 function cargarDiseño(){
+
+
 
     firebase.database()
     .ref("diseño")
@@ -98,43 +169,76 @@ function cargarDiseño(){
     .then(snapshot=>{
 
 
-        const datos = snapshot.val();
+        const datos=snapshot.val();
 
 
-        if(!datos) return;
+
+        if(!datos)return;
+
 
 
         datos.forEach(item=>{
 
 
-            const elemento = document.getElementById(item.id);
+            const widget=document.getElementById(item.id);
 
 
-            if(elemento){
 
-                elemento.style.left=item.x+"px";
+            if(widget){
 
-                elemento.style.top=item.y+"px";
 
-                elemento.style.width=item.width+"px";
+                widget.style.left=item.x+"px";
 
-                elemento.style.height=item.height+"px";
 
-                elemento.style.transform=item.transform;
+                widget.style.top=item.y+"px";
+
+
+                widget.style.width=item.width+"px";
+
+
+                widget.style.height=item.height+"px";
+
+
+                widget.style.transform=item.transform;
+
 
             }
+
 
 
         });
 
 
+
     });
+
+
 
 }
 
 
-window.onload = ()=>{
+
+
+
+// ===============================
+// BOTÓN GUARDAR
+// ===============================
+
+
+document
+.getElementById("btnGuardar")
+.addEventListener("click",guardarDiseño);
+
+
+
+
+
+// INICIO
+
+window.onload=()=>{
+
 
     cargarDiseño();
+
 
 };
